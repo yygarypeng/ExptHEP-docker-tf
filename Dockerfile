@@ -3,20 +3,20 @@
 
 FROM tensorflow/tensorflow:2.13.0-gpu
 
-LABEL maintainer="Gary_Peng <yygarypeng@gapp.nthu.edu.tw>"
+LABEL maintainer="Gary Peng <yygarypeng@gapp.nthu.edu.tw>"
 
 ENV SUDO_FORCE_REMOVE=yes
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN buildDeps="git vim wget openssl htop glances libgl1-mesa-glx" && \
-	apt-get update && \
-	apt-get install -y $buildDeps && \
-	apt-get clean
-
+    apt-get update && \
+    apt-get install --assume-yes apt-utils && \
+    apt-get install -y $buildDeps && \
+    apt-get clean
 RUN mkdir -p ~/miniconda3 && \
-	wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh && \
-	bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3 && \
-	rm -rf ~/miniconda3/miniconda.sh
+    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh && \
+    bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3 && \
+    rm -rf ~/miniconda3/miniconda.sh
 ENV PATH=/root/miniconda3/bin:$PATH
 RUN conda init
 
@@ -24,7 +24,7 @@ ADD tf.yml /root/miniconda3/tf.yml
 RUN conda env create --name tf -f /root/miniconda3/tf.yml
 
 RUN mkdir ~/work/ && \
-	mkdir ~/data/
+    mkdir ~/data/
 
 RUN echo "parse_git_branch() {\n git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \\(.*\\)/ (\\1)/'\n}" >> ~/.bashrc && \
     echo "export PS1='\[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ '\n" >> ~/.bashrc && \
