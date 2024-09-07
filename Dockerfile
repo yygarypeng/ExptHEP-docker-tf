@@ -26,26 +26,12 @@ RUN conda env create --name tf -f /root/miniconda3/tf.yml
 RUN mkdir ~/work/ && \
     mkdir ~/data/
 
-RUN echo "parse_git_branch() {\n git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \\(.*\\)/ (\\1)/'\n}" >> ~/.bashrc && \
-    echo "export PS1='\[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ '\n" >> ~/.bashrc && \
-    echo "# Other alias\n\
-alias lesf='less +F'\n\
-alias lesg='less +G'\n\
-alias cc='clear'\n\
-alias data='cd ~/data/'\n\
-alias work='cd ~/work/'\n\
-alias home='cd ~'\n\
-\n\
-bind 'set show-all-if-ambiguous on'\n\
-bind 'set completion-ignore-case on'\n\
-bind 'TAB:menu-complete'\n\
-" >> ~/.bashrc
-
-# Use a separate RUN command for conda activate and cd ~/work/
-RUN echo "conda activate tf" >> ~/.bashrc && \
-    echo "cd ~/work/" >> ~/.bashrc
+ADD bashrc.sh /root/bashrc.sh
+RUN cat /root/bashrc.sh >> ~/.bashrc && \
+    rm /root/bashrc.sh
 
 # Add test code in home directory
 ADD test.py /root/test.py
+ADD gitconfig /root/.gitconfig
 
 CMD ["/bin/bash"]

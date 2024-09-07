@@ -91,5 +91,4 @@ plt.legend(loc='upper right')
 plt.title("mplhep Test")
 plt.show()
 
-print("Finish!!")
-
+print("Finish!")
