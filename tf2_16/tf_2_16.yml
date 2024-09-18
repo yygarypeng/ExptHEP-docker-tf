@@ -5,9 +5,11 @@ dependencies:
     - python=3.11
     - jupyter
     - pandas
+    - pytables
     - numba
     - scipy
     - matplotlib
+    - seaborn
     - scikit-learn
     - xgboost
     - shap
