@@ -5,11 +5,12 @@ dependencies:
     - python=3.10
     - jupyter
     - pandas
-    - pytables    
+    - pytables
     - numba
     - scipy
     - matplotlib
-    - seaborn    
+    - seaborn
+    - pydot
     - scikit-learn
     - xgboost
     - shap
