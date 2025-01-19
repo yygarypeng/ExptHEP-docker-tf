@@ -1,5 +1,5 @@
 # LICENSE: MIT (Gary Peng: Dec. 09, 2023)
-# This dockerfile build on the Ubuntu 20.04.5 LTS (focal); the base server env is from tensorflow official image (tensorflow/tensorlfow:2.13.0-gpu)
+# This dockerfile built on the Ubuntu 24.04.1 LTS with nv GPU driver Version 550.127.08 andCUDA version 12.4; the base server env is from TensorFlow official image (tensorflow/tensorlfow:2.16.1-gpu)
 
 FROM tensorflow/tensorflow:2.16.1-gpu
 
